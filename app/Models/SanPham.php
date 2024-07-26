@@ -35,8 +35,10 @@ class SanPham extends Model
     ];
     public function danhMuc(){
         return  $this->belongsTo(danhMuc::class);
+        // một sản phẩm thuộc một danh mục
     }
     public function hinhAnhSanPham(){
-        return  $this->hasMany(danhMuc::class);
+        return  $this->hasMany(hinhAnhSanPham::class);
+        // một sản phẩm có nhiều hình ảnh
     }
 }

@@ -21,7 +21,7 @@
 
         <!-- Icons -->
         <link href="{{ asset('assets/admin/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-
+        @yield('css')
     </head>
 
     <!-- body start -->
@@ -77,7 +77,7 @@
         <script src="{{ asset('assets/admin/assets/js/pages/analytics-dashboard.init.js') }}"></script>
 
         @yield('js')
-        
+
         <!-- App js-->
         <script src="{{ asset('assets/admin/assets/js/app.js') }}"></script>
     </body>

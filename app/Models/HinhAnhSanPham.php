@@ -14,5 +14,6 @@ class HinhAnhSanPham extends Model
     ];
     public function sanPham(){
         return  $this->belongsTo(SanPham::class);
+        // hình ảnh thuộc một sản phẩm
     }
 }

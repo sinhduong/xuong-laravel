@@ -16,7 +16,7 @@ class DanhMucController extends Controller
     public function index()
     {
         $title="Danh mục sản phẩm";
-        $listDanhMuc = DanhMuc::all();
+        $listDanhMuc = DanhMuc::orderByDesc('trang_thai')->get();
         // dd($listDanhMuc);
         return  view('admins.danhmucs.index',compact('title','listDanhMuc'));
     }

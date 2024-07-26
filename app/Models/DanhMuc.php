@@ -18,5 +18,6 @@ class DanhMuc extends Model
     ];
     public function sanPhams(){
         return  $this->hasMany(SanPham::class);
+        // một danh mục với nhiều sản phẩm
     }
 }
