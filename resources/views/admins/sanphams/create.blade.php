@@ -19,7 +19,7 @@
 
         <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
             <div class="flex-grow-1">
-                <h4 class="fs-18 fw-semibold m-0">Quản lý danh mục sản phẩm</h4>
+                <h4 class="fs-18 fw-semibold m-0">Quản lý thông tin sản phẩm</h4>
             </div>
         </div>
        <div class="row">
@@ -75,7 +75,8 @@
                                         class="form-select" @error('danh_muc_id') is-invalid @enderror>
                                         <option selected>--chọn danh mục--</option>
                                         @foreach ($listDanhMuc as $item)
-                                        <option value="{{ $item->id }}" {{ old('danh_muc_id') == $item->id ? 'selected': '' }}>{{ $item->ten_danh_muc }}</option>
+                                        <option value="{{ $item->id }}" {{ old('danh_muc_id') == $item->id ? 'selected': '' }}>
+                                        {{ $item->ten_danh_muc }}</option>
 
                                         @endforeach
                                     </select>
@@ -103,8 +104,10 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="mo_ta_ngan" class="form-label">mô tả ngắn</label>
-                                        <textarea name="mo_ta_ngan" id="mo_ta_ngan" class="form-control"
-                                        rows="3" placeholder="mô tả ngắn" value="{{ old('mo_ta_ngan') }}"></textarea>
+                                        <textarea name="mo_ta_ngan" id="mo_ta_ngan"
+                                        class="form-control
+                                        @error('mo_ta_ngan') is-invalid @enderror"
+                                        rows="3" placeholder="mô tả ngắn" >{{ old('mo_ta_ngan') }}</textarea>
                                     @error('mo_ta_ngan')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror

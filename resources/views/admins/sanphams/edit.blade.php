@@ -4,8 +4,13 @@
 {{ $title }}
 @endsection
 @section('css')
-
+    <!-- Quill css -->
+    <link href="{{ asset('assets/admin/assets/libs/quill/quill.core.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/admin/assets/libs/quill/quill.snow.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/admin/assets/libs/quill/quill.bubble.css') }}" rel="stylesheet" type="text/css" />
 @endsection
+
+
 @section('content')
 <div class="content">
 
@@ -14,7 +19,7 @@
 
         <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
             <div class="flex-grow-1">
-                <h4 class="fs-18 fw-semibold m-0">Quản lý danh mục sản phẩm</h4>
+                <h4 class="fs-18 fw-semibold m-0">Quản lý thông tin sản phẩm</h4>
             </div>
         </div>
        <div class="row">
@@ -23,47 +28,165 @@
                 <div class="card-header">
                     <h5 class="card-title mb-0">{{ $title }}</h5>
                 </div><!-- end card header -->
-
                 <div class="card-body">
-                    <form action="{{ route('admins.danhmucs.update', $danhMuc->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admins.sanphams.update',$sanPham->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <div class="row">
-                            <div class="col-lg-6">
+                    <div class="row">
+                            <div class="col-lg-4">
                                 <div class="mb-3">
-                                    <label for="ten_danh_muc" class="form-label">Tên danh mục</label>
-                                    <input type="text" id="ten_danh_muc" name="ten_danh_muc" class="form-control @error('ten_danh_muc') is-invalid @enderror"
-                                        value="{{ old('ten_danh_muc', $danhMuc->ten_danh_muc) }}" placeholder="Tên danh mục">
-                                    @error('ten_danh_muc')
+                                    <label for="ma_san_pham" class="form-label">mã sản phẩm</label>
+                                    <input type="text" id="ma_san_pham" name="ma_san_pham" class="form-control"
+                                    @error('ma_san_pham') is-invalid @enderror
+                                        value="{{ $sanPham->ma_san_pham }}" placeholder="mã sản phẩm">
+                                    @error('ma_san_pham')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="trang_thai" class="form-label">Trạng thái</label>
+                                    <label for="ten_san_pham" class="form-label">Tên sản phẩm</label>
+                                    <input type="text" id="ten_san_pham" name="ten_san_pham" class="form-control"
+                                    @error('ten_san_pham') is-invalid @enderror
+                                        value="{{ $sanPham->ten_san_pham }}" placeholder="tên sản phẩm">
+                                    @error('ten_san_pham')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="gia_san_pham" class="form-label">giá sản phẩm</label>
+                                    <input type="number" id="gia_san_pham" name="gia_san_pham" class="form-control"
+                                    @error('gia_san_pham') is-invalid @enderror
+                                        value="{{ $sanPham->gia_san_pham }}" placeholder="giá sản phẩm">
+                                    @error('gia_san_pham')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="gia_khuyen_mai" class="form-label">giá khuyến mãi</label>
+                                    <input type="number" id="gia_khuyen_mai" name="gia_khuyen_mai" class="form-control"
+                                    @error('gia_khuyen_mai') is-invalid @enderror
+                                        value="{{ $sanPham->gia_khuyen_mai }}" placeholder="giá khuyến mãi">
+                                    @error('gia_khuyen_mai')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="danh_muc_id" class="form-label">danh mục</label>
+                                    <select name="danh_muc_id"
+                                        class="form-select" @error('danh_muc_id') is-invalid @enderror>
+                                        <option selected>--chọn danh mục--</option>
+                                        @foreach ($listDanhMuc as $item)
+                                        <option value="{{ $item->id }}" {{ $sanPham->danh_muc_id == $item->id ? 'selected': '' }}>{{ $item->ten_danh_muc }}</option>
+
+                                        @endforeach
+                                    </select>
+                                    @error('danh_muc_id')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="so_luong" class="form-label">số lượng sản phẩm</label>
+                                    <input type="number" id="so_luong" name="so_luong" class="form-control"
+                                    @error('so_luong') is-invalid @enderror
+                                        value="{{ $sanPham->so_luong }}" placeholder="số lượng sản phẩm">
+                                    @error('so_luong')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="ngay_nhap" class="form-label">ngày nhập sản phẩm</label>
+                                    <input type="date" id="ngay_nhap" name="ngay_nhap" class="form-control"
+                                    @error('ngay_nhap') is-invalid @enderror
+                                        value="{{ $sanPham->ngay_nhap }}" placeholder="ngày nhập sản phẩm">
+                                    @error('ngay_nhap')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="mo_ta_ngan" class="form-label">mô tả ngắn</label>
+                                        <textarea name="mo_ta_ngan" id="mo_ta_ngan"
+                                        class="form-control
+                                        @error('mo_ta_ngan') is-invalid @enderror"
+                                        rows="3" placeholder="mô tả ngắn" >{{$sanPham->mo_ta_ngan }}</textarea>
+                                    @error('mo_ta_ngan')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="is_type" class="form-label">Trạng thái</label>
                                     <div class="col-sm-10 mb-3 d-flex gap-2">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="trang_thai" id="gridRadios1" value="1" {{ $danhMuc->trang_thai == 1 ? 'checked' : '' }}>
+                                            <input class="form-check-input" type="radio" name="is_type" id="gridRadios1" value="1" {{ $sanPham->is_type == 1 ? 'checked': '' }}>
                                             <label class="form-check-label text-success" for="gridRadios1">
                                                 Hiển thị
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="trang_thai" id="gridRadios2" value="0" {{ $danhMuc->trang_thai == 0 ? 'checked' : '' }}>
+                                            <input class="form-check-input" type="radio" name="is_type" id="gridRadios2" value="0" {{ $sanPham->is_type == 0 ? 'checked': '' }}>
                                             <label class="form-check-label text-danger" for="gridRadios2">
                                                 Ẩn
                                             </label>
                                         </div>
                                     </div>
                                 </div>
+                                <label for="is_type" class="form-label">Tùy chỉnh khác</label>
+                                <div class=" form-switch mb-2 ps-3 d-flex justify-content-between">
+                                    <div class="form-check">
+                                        <input class="form-check-input bg-danger" type="checkbox"  id="is_new" name="is_new" {{ $sanPham->is_new == 1 ? 'checked': '' }}>
+                                        <label class="form-check-label" for="is_new">New</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input bg-secondary" type="checkbox"  id="is_hot" name="is_hot" {{ $sanPham->is_hot == 1 ? 'checked': '' }}>
+                                        <label class="form-check-label" for="is_hot">Hot</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input bg-warning" type="checkbox"  id="is_hot_deal" name="is_hot_deal" {{ $sanPham->is_hot_deal == 1 ? 'checked': '' }}>
+                                        <label class="form-check-label" for="is_hot_deal">Hpt deal</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input bg-success" type="checkbox"  id="is_show_home" name="is_show_home" {{ $sanPham->is_show_home == 1 ? 'checked': '' }}>
+                                        <label class="form-check-label" for="	is_show_home">Show home</label>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-8">
+                                <div class="mb-3">
+                                    <label for="is_type" class="form-label">mô tả chi tiết sản phẩm</label>
+                                    <div id="quill-editor" style="height: 400px;">
+                                        <p>Preset build with <code>snow</code> theme, and some common formats.</p>
+                                    </div>
+                                    <textarea name="noi_dung" id="noi_dung_content" class="d-none"> Nhập mô tả chi tiết sản phẩm </textarea>
+                                </div>
+
                                 <div class="mb-3">
                                     <label for="hinh_anh" class="form-label">Hình ảnh</label>
-                                    <input type="file" id="hinh_anh" name="hinh_anh" class="form-control @error('hinh_anh') is-invalid @enderror" value="{{ old('hinh_anh') }}" onchange="previewImage(event)">
+                                    <input type="file" id="hinh_anh" name="hinh_anh" class="form-control"
+                                    @error('hinh_anh') is-invalid @enderror value="{{ old('hinh_anh') }}" onchange="previewImage(event)">
                                     @error('hinh_anh')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
-                                    <img id="imagePreview" src="{{ $danhMuc->hinh_anh ? Storage::url($danhMuc->hinh_anh) : '#' }}" alt="Image Preview" style="margin-top: 10px; max-width: 100px;" />
+                                    <img  id="imagePreview" src="{{ Storage::url($sanPham->hinh_anh) }}" alt="Image Preview" style=" margin-top: 10px; max-width: 100px;"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="hinh_anh" class="form-label">Album hình ảnh</label>
+                                    <i id="add-row" class="mdi mdi-plus text-muted fs-18 ms-3 rounded-2 border p-1" style="cursor: pointer;"></i>
+                                    <table class="table align-middle table-nowrap mb-0">
+                                        <tbody id="image-table-body">
+                                            @foreach ($sanPham->hinhAnhSanPham as $index=>$hinhAnh)
+                                            <tr>
+                                                <td class="d-flex align-items-center">
+                                                    <img id="Preview_{{ $index }}" src="{{ Storage::url($hinhAnh->hinh_anh) }}" alt="hình ảnh sản phẩm" style="width: 50px;" class="me-3"/>
+                                                    <input type="file" id="hinh_anh_0" name="list_hinh_anh[{{ $hinhAnh->id }}]" class="form-control" onchange="PreviewImage(this,{{ $index }})">
+                                                    <input type="hidden" name="list_hinh_anh[{{ $hinhAnh->id }}]" value="{{ $hinhAnh->id }}">
+                                                </td>
+                                                <td>
+                                                    <i class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1" style="cursor: pointer;" onclick="removeRow(this, {{ $hinhAnh->id }})"></i>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    <input type="hidden" id="deleted_images" name="deleted_images" value="">
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center">
@@ -76,10 +199,16 @@
         </div>
        </div>
 
+
     </div> <!-- container-fluid -->
 </div> <!-- content -->
 @endsection
 @section('js')
+<script src="{{ asset('assets/admin/assets/libs/quill/quill.core.js') }}"></script>
+<script src="{{ asset('assets/admin/assets/libs/quill/quill.min.js') }}"></script>
+
+<script src="{{ asset('assets/admin/assets/libs/quill/quill.core.js') }}"></script>
+<script src="{{ asset('assets/admin/assets/libs/quill/quill.min.js') }}"></script>
 <script>
     function previewImage(event) {
         var reader = new FileReader();
@@ -87,8 +216,59 @@
             var output = document.getElementById('imagePreview');
             output.src = reader.result;
             output.style.display = 'block';
+            document.querySelector('.delete-icon').style.display = 'block';
         };
         reader.readAsDataURL(event.target.files[0]);
     }
+
+    function removeImage() {
+        document.getElementById('imagePreview').style.display = 'none';
+        document.querySelector('.input-overlay').value = '';
+        document.querySelector('.delete-icon').style.display = 'none';
+    }
+
+    function PreviewImage(input, rowIndex) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById(`Preview_${rowIndex}`).src = e.target.result;
+            document.getElementById(`Preview_${rowIndex}`).nextElementSibling.style.display = 'block';
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function removeRow(element, imageId) {
+    element.closest('tr').remove();
+    var deletedImagesInput = document.getElementById('deleted_images');
+    var deletedImages = deletedImagesInput.value ? deletedImagesInput.value.split(',') : [];
+    deletedImages.push(imageId);
+    deletedImagesInput.value = deletedImages.join(',');
+}
+
+    document.getElementById('add-row').addEventListener('click', function () {
+    var rowCount = document.querySelectorAll('#image-table-body tr').length;
+    var newRow = document.createElement('tr');
+    newRow.innerHTML = `
+        <td class="d-flex align-items-center">
+            <img id="Preview_${rowCount}" src="https://via.placeholder.com/50" alt="Image Preview" style="width: 50px;" class="me-3"/>
+            <input type="file" id="hinh_anh_${rowCount}" name="new_list_hinh_anh[]" class="form-control" onchange="PreviewImage(this, ${rowCount})">
+        </td>
+        <td>
+            <i class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1" style="cursor: pointer;" onclick="removeRow(this,null)"></i>
+        </td>`;
+    document.getElementById('image-table-body').appendChild(newRow);
+});
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var quill = new Quill("#quill-editor", {
+            theme: "snow"
+        });
+        var old_content = `{!! $sanPham->noi_dung !!}`;
+        quill.root.innerHTML = old_content;
+        quill.on('text-change', function() {
+            document.getElementById('noi_dung_content').value = quill.root.innerHTML;
+        });
+    });
 </script>
 @endsection

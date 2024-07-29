@@ -3,9 +3,10 @@
 @section('title')
 {{ $title }}
 @endsection
-@section('css')
 
+@section('css')
 @endsection
+
 @section('content')
 <div class="content">
 
@@ -14,7 +15,7 @@
 
         <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
             <div class="flex-grow-1">
-                <h4 class="fs-18 fw-semibold m-0">Quản lý danh mục sản phẩm</h4>
+                <h4 class="fs-18 fw-semibold m-0">Quản lý thông tin sản phẩm</h4>
             </div>
         </div>
        <div class="row">
@@ -22,7 +23,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h5 class="card-title align-content-center mb-0">{{ $title }}</h5>
-                    <a href="{{ route('admins.sanphams.create') }}" class="btn btn-success"><i data-feather="plus-square"></i>Thêm sản phẩm</a>
+                    <a href="{{ route('admins.sanphams.create') }}" class="btn btn-success"><i data-feather="plus-square"></i> Thêm sản phẩm</a>
                 </div><!-- end card header -->
 
                 <div class="card-body">
@@ -55,7 +56,7 @@
                                     {{-- <th scope="row">{{ $index+1 }}</th> --}}
                                     <th scope="row">{{ $item->ma_san_pham }}</th>
                                     <td class="d-flex align-items-center">
-                                        <img src="{{ Storage::url( $item->hinh_anh) }}" class="avatar avatar-sm rounded-2 me-3" />
+                                        <img src="{{ Storage::url($item->hinh_anh) }}" class="avatar avatar-sm rounded-2 me-3" />
                                     </td>
                                     <td>{{ $item->ten_san_pham }}</td>
                                     <td>{{ $item->danhMuc->ten_danh_muc }}</td>
@@ -64,19 +65,20 @@
                                     <td>{{ $item->so_luong }}</td>
                                     <td class="{{ $item->is_type==true  ? 'text-success' : 'text-danger' }}">
                                         {{ $item->is_type==true  ? 'hiển thị' : 'Ẩn' }}
-                                     </td>
-
+                                    </td>
                                     <td>
-                                        <a href="{{ route('admins.sanphams.edit', $item->id) }}">
-                                            <i class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
-                                        </a>
-                                        <form action="{{ route('admins.sanphams.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('bạn có đồng ý xóa không')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="border-0 bg-white">
-                                                <i class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
-                                            </button>
-                                        </form>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{ route('admins.sanphams.edit', $item->id) }}" class="me-1">
+                                                <i class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1"></i>
+                                            </a>
+                                            <form action="{{ route('admins.sanphams.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('bạn có đồng ý xóa không')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="border-0 bg-white p-0">
+                                                    <i class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -90,6 +92,6 @@
     </div> <!-- container-fluid -->
 </div> <!-- content -->
 @endsection
-@section('js')
 
+@section('js')
 @endsection
