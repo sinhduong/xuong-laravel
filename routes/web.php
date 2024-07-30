@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\SanPhamController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -38,7 +39,7 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 //     return 'đây là trang admin';
 // })->middleware(['auth','auth.admin']);
 
-
+Route::get('/product/detail/{id}',[ProductController::class,'chiTietSanPham'])->name('products.detal');
 // Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
