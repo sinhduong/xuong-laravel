@@ -91,7 +91,7 @@
                                                 </li>
                                                 <li class="mega-title"><span>column 03</span>
                                                     <ul>
-                                                        <li><a href="cart.html">cart</a></li>
+                                                        <li><a href="{{ route('cart.list') }}">cart</a></li>
                                                         <li><a href="checkout.html">checkout</a></li>
                                                         <li><a href="compare.html">compare</a></li>
                                                         <li><a href="wishlist.html">wishlist</a></li>
@@ -196,9 +196,9 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" class="minicart-btn">
+                                        <a href="{{ route('cart.list') }}" class="minicart-btn">
                                             <i class="pe-7s-shopbag"></i>
-                                            <div class="notification">2</div>
+                                            <div class="notification">{{ session('cart') ? count(session('cart')) : '0' }}</div>
                                         </a>
                                     </li>
                                 </ul>
@@ -304,7 +304,7 @@
                                     </li>
                                     <li class="mega-title menu-item-has-children"><a href="#">column 03</a>
                                         <ul class="dropdown">
-                                            <li><a href="cart.html">cart</a></li>
+                                            <li><a href="{{ route('cart.list') }}">cart</a></li>
                                             <li><a href="checkout.html">checkout</a></li>
                                             <li><a href="compare.html">compare</a></li>
                                             <li><a href="wishlist.html">wishlist</a></li>

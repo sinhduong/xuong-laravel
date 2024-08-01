@@ -84,15 +84,22 @@
                                         </div>
                                         <p class="pro-desc">Mô tả ngắn <br>
                                             {{ $sanPham->mo_ta_ngan }} </p>
-                                        <div class="quantity-cart-box d-flex align-items-center">
-                                            <h6 class="option-title">qty:</h6>
-                                            <div class="quantity">
-                                                <div class="pro-qty"><input type="text" value="1"></div>
-                                            </div>
-                                            <div class="action_link">
-                                                <a class="btn btn-cart2" href="#">Add to cart</a>
-                                            </div>
-                                        </div>
+                                            <form action="{{ route('cart.add') }}" method="POST">
+                                                @csrf
+                                                <div class="quantity-cart-box d-flex align-items-center">
+                                                    <h6 class="option-title">qty:</h6>
+                                                    <div class="quantity">
+                                                        <div class="pro-qty">
+                                                            <input type="text" value="1" name="quantity" id="quantityInput">
+                                                            <input type="hidden" name="product_id" value="{{ $sanPham->id }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="action_link">
+                                                        <button type="submit" class="btn btn-cart2">Add to cart</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
 
                                         <div class="useful-links">
                                             <a href="#" data-bs-toggle="tooltip" title="Compare"><i
@@ -272,9 +279,14 @@
                                         <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
                                     </div>
+                                   <form action="{{ route('cart.add') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input type="hidden" name="product_id" value="{{ $item->id }}">
                                     <div class="cart-hover">
                                         <button class="btn btn-cart">add to cart</button>
                                     </div>
+                                   </form>
                                 </figure>
                                 <div class="product-caption text-center">
                                     <div class="product-identity">
@@ -300,5 +312,40 @@
 @endsection
 
 @section('js')
+<script>
+$(document).ready(function() {
+    // Thêm nút cộng và trừ vào giao diện chỉ một lần
+    $('.pro-qty').each(function() {
+        if ($(this).find('.qtybtn').length === 0) {
+            $(this).prepend('<span class="dec qtybtn">-</span>');
+            $(this).append('<span class="inc qtybtn">+</span>');
+        }
+    });
 
+    // Xử lý sự kiện click cho nút cộng và trừ
+    $('.pro-qty').off('click', '.qtybtn').on('click', '.qtybtn', function () {
+        var $button = $(this);
+        var $input = $button.parent().find('input[name="quantity"]');
+        var oldValue = parseFloat($input.val());
+
+        if ($button.hasClass('inc')) {
+            // Tăng số lượng
+            var newVal = oldValue + 1;
+        } else {
+            // Giảm số lượng
+            var newVal = oldValue > 1 ? oldValue - 1 : 1;
+        }
+        $input.val(newVal);
+    });
+
+    // Kiểm tra giá trị khi ô input thay đổi
+    $('#quantityInput').on('change', function(){
+        var value = parseInt($(this).val(), 10);
+        if(isNaN(value) || value < 1){
+            alert('Số lượng phải lớn hơn hoặc bằng 1.');
+            $(this).val(1);
+        }
+    });
+});
+</script>
 @endsection

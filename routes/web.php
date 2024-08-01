@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\SanPhamController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,9 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 // })->middleware(['auth','auth.admin']);
 
 Route::get('/product/detail/{id}',[ProductController::class,'chiTietSanPham'])->name('products.detal');
+Route::get('/list-cart',          [CartController::class,'listCart'])->name('cart.list');
+Route::post('/add-to-cart',       [CartController::class,'addCart'])->name('cart.add');
+Route::post('/update-cart',       [CartController::class,'updateCart'])->name('cart.update');
 // Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
