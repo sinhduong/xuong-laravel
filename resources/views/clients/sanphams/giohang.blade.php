@@ -30,6 +30,14 @@
         <div class="cart-main-wrapper section-padding">
             <div class="container">
                 <div class="section-bg-color">
+
+                    @if (session('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
+
                     <div class="row">
                         <div class="col-lg-12">
                             <form action="{{ route('cart.update') }}" method="POST">
@@ -54,7 +62,7 @@
                                                     <input type="hidden" name="cart[{{ $key }}][hinh_anh]" value="{{ $item['hinh_anh'] }}">
                                                 </a></td>
                                                 <td class="pro-title">
-                                                    <a href="{{ route('products.detal',$key) }}">{{ $item['ten_san_pham'] }}</a>
+                                                    <a href="{{ route('products.detail',$key) }}">{{ $item['ten_san_pham'] }}</a>
                                                     <input type="hidden" name="cart[{{ $key }}][ten_san_pham]" value="{{ $item['ten_san_pham'] }}">
                                                 </td>
                                                 <td class="pro-price"><span>{{ number_format($item['gia'],0,'','.') }}đ</span>
@@ -109,7 +117,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <a href="checkout.html" class="btn btn-sqr d-block">Proceed Checkout</a>
+                                <a href="{{ route('donhangs.create') }}" class="btn btn-sqr d-block">Proceed Checkout</a>
                             </div>
                         </div>
                     </div>

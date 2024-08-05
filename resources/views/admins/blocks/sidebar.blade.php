@@ -1,9 +1,7 @@
 <div class="app-sidebar-menu">
     <div class="h-100" data-simplebar>
-
         <!--- Sidemenu -->
         <div id="sidebar-menu">
-
             <div class="logo-box">
                 <a class='logo logo-light' href='index.html'>
                     <span class="logo-sm">
@@ -24,7 +22,6 @@
             </div>
 
             <ul id="side-menu">
-
                 <li class="menu-title">Quản trị</li>
                 <li>
                     <a class='tp-link' href='{{ route('admins.dashboard') }}'>
@@ -38,10 +35,9 @@
                         <span> quản lý tài khoản </span>
                     </a>
                 </li>
-
             </ul>
-            <ul id="side-menu">
 
+            <ul id="side-menu">
                 <li class="menu-title">kinh doanh </li>
                 <li>
                     <a class='tp-link' href='{{ route('admins.danhmucs.index') }}'>
@@ -55,12 +51,15 @@
                         <span> sản phẩm </span>
                     </a>
                 </li>
-
+                <li>
+                    <a class='tp-link' href='{{ route('admins.donhangs.index') }}'>
+                        <i data-feather="shopping-bag"></i>
+                        <span> Đơn hàng </span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- End Sidebar -->
-
         <div class="clearfix"></div>
-
     </div>
 </div>

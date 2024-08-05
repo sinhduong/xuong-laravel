@@ -40,7 +40,8 @@
 <body>
 
     @include('clients.blocks.header')
-
+    @yield('slide')
+   
     <main>
         @yield('content')
     </main>

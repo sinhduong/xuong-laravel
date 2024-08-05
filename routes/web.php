@@ -1,27 +1,18 @@
 <?php
 
-use App\Http\Controllers\Admin\DanhMucController;
-use App\Http\Controllers\Admin\SanPhamController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\DanhMucController;
+use App\Http\Controllers\Admin\DonHangController;
+use App\Http\Controllers\Admin\SanPhamController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('admins.dashboard');
-});
+Route::get('/', [HomeController::class, 'index'])->name('client.home');
 
 
 
@@ -32,20 +23,22 @@ Route::get('register', [AuthController::class, 'showFormRegister']);
 Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-// Route::get('/home', function () {
-//     return view('home');
-// })->middleware();
 
-// Route::get('/admin', function (){
-//     return 'đây là trang admin';
-// })->middleware(['auth','auth.admin']);
+Route::get('/product/detail/{id}', [ProductController::class, 'chiTietSanPham'])->name('products.detail');
+Route::get('/list-cart',           [CartController::class, 'listCart'])->name('cart.list');
+Route::post('/add-to-cart',        [CartController::class, 'addCart'])->name('cart.add');
+Route::post('/update-cart',        [CartController::class, 'updateCart'])->name('cart.update');
 
-Route::get('/product/detail/{id}',[ProductController::class,'chiTietSanPham'])->name('products.detal');
-Route::get('/list-cart',          [CartController::class,'listCart'])->name('cart.list');
-Route::post('/add-to-cart',       [CartController::class,'addCart'])->name('cart.add');
-Route::post('/update-cart',       [CartController::class,'updateCart'])->name('cart.update');
-// Auth::routes();
 
+Route::middleware('auth')->prefix('donhangs')
+    ->as('donhangs.')
+    ->group(function () {
+        Route::get('/',                 [OrderController::class, 'index'])->name('index');
+        Route::get('/create',           [OrderController::class, 'create'])->name('create');
+        Route::post('/store',           [OrderController::class, 'store'])->name('store');
+        Route::get('/show/{id}',        [OrderController::class, 'show'])->name('show');
+        Route::put('{id}/update',       [OrderController::class, 'update'])->name('update');
+    });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Route Admin
@@ -81,5 +74,13 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::put('{id}/update',       [SanPhamController::class, 'update'])->name('update');
                 Route::delete('{id}/destroy',   [SanPhamController::class, 'destroy'])->name('destroy');
             });
-
+            // Route đơn hàng
+            Route::prefix('donhangs')
+            ->as('donhangs.')
+            ->group(function () {
+                Route::get('/',                 [DonHangController::class, 'index'])->name('index');
+                Route::get('/show/{id}',        [DonHangController::class, 'show'])->name('show');
+                Route::put('{id}/update',       [DonHangController::class, 'update'])->name('update');
+                Route::delete('{id}/destroy',   [DonHangController::class, 'destroy'])->name('destroy');
+            });
     });
