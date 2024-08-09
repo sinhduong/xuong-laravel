@@ -179,6 +179,7 @@
                                         <ul class="dropdown-list">
                                             <li><a href="{{ route('login') }}">login</a></li>
                                             <li><a href="{{ route('register') }}">register</a></li>
+                                            <li><a href="{{ route('logout') }}">logout</a></li>
                                             {{-- <li><a href="#">my account</a></li> --}}
                                             <li><a href="{{ route('donhangs.index') }}">My Order</a></li>
                                         </ul>

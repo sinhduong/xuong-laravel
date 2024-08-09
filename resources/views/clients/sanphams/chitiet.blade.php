@@ -262,7 +262,7 @@
                             @foreach ($listSanPham as $item)
                             <div class="product-item">
                                 <figure class="product-thumb">
-                                    <a href="product-details.html">
+                                    <a href="{{ route('products.detail', $item->id) }}">
                                         <img class="pri-img" src="{{ Storage::url($item->hinh_anh)}}" alt="product">
                                         <img class="sec-img" src="{{ Storage::url($item->hinh_anh)}}" alt="product">
                                     </a>

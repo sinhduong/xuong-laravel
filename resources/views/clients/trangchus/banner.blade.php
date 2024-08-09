@@ -10,7 +10,7 @@
     <div class="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
         <!-- single slider item start -->
         <div class="hero-single-slide hero-overlay">
-            <div class="hero-slider-item bg-img" data-bg="{{ asset('assets/client/assets/img/slider/home1-slide2.jpg') }}">
+            <div class="hero-slider-item bg-img" data-bg="{{ asset('assets/client/assets/img/slider/home01-slide.jpg') }}">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
@@ -28,7 +28,7 @@
 
         <!-- single slider item start -->
         <div class="hero-single-slide hero-overlay">
-            <div class="hero-slider-item bg-img" data-bg="{{ asset('assets/client/assets/img/slider/home1-slide3.jpg') }}">
+            <div class="hero-slider-item bg-img" data-bg="{{ asset('assets/client/assets/img/slider/home02-slide.jpg') }}">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
