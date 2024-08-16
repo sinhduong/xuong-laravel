@@ -10,20 +10,31 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\DonHangController;
 use App\Http\Controllers\Admin\SanPhamController;
+use App\Http\Controllers\Auth\PasswordResetController;
 
 
-Route::get('/', [HomeController::class, 'index'])->name('client.home');
 
 
 
+// login logout register
 Route::get('login', [AuthController::class, 'showFormLogin']);
 Route::post('login', [AuthController::class, 'login'])->name('login');
-
 Route::get('register', [AuthController::class, 'showFormRegister']);
 Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 
+// quên mật khẩu
+
+Route::get('password/reset', [PasswordResetController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('password/email', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [PasswordResetController::class, 'reset'])->name('password.update');
+
+
+
+// home
+Route::get('/', [HomeController::class, 'index'])->name('client.home');
 Route::get('/product/detail/{id}', [ProductController::class, 'chiTietSanPham'])->name('products.detail');
 Route::get('/list-cart',           [CartController::class, 'listCart'])->name('cart.list');
 Route::post('/add-to-cart',        [CartController::class, 'addCart'])->name('cart.add');

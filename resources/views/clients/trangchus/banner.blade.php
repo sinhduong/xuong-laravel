@@ -46,7 +46,7 @@
 
         <!-- single slider item start -->
         <div class="hero-single-slide hero-overlay">
-            <div class="hero-slider-item bg-img" data-bg="{{ asset('assets/client/assets/img/slider/home1-slide1.jpg') }}">
+            <div class="hero-slider-item bg-img" data-bg="{{ asset('assets/client/assets/img/slider/banner-thoi-trang-dang-cap-hien-dai_113856116.jpg') }}">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">

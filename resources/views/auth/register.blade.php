@@ -1,77 +1,70 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+<form method="POST" action="{{ route('register') }}" class="form" id="registerForm">
+    @csrf
+    <h3>Register</h3>
 
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+    <div class="input-group">
+        <input type="text" name="name" placeholder="Username" value="{{ old('name') }}" >
+        <ion-icon class="icon" name="person"></ion-icon>
     </div>
-</div>
+    @error('name')
+        <span class="error-message-register">{{ $message }}</span>
+    @enderror
+
+    <div class="input-group">
+        <input type="text" name="email" placeholder="Email" value="{{ old('email') }}" >
+        <ion-icon class="icon" name="mail"></ion-icon>
+    </div>
+    @error('email')
+        <span class="error-message-register">{{ $message }}</span>
+    @enderror
+
+    <div class="input-group">
+        <input type="text" id="registerPassword" name="password" placeholder="Password" value="{{ old('password') }}">
+        <ion-icon class="icon" id="toggleRegisterPassword" name="lock-closed"></ion-icon>
+    </div>
+    @error('password')
+        <span class="error-message-register">{{ $message }}</span>
+    @enderror
+
+    <div class="input-group">
+        <input type="text" id="confirmPassword" name="password_confirmation" placeholder="Confirm Password" value="{{ old('password_confirmation') }}">
+        <ion-icon class="icon" id="toggleConfirmPassword" name="lock-closed"></ion-icon>
+    </div>
+    @error('password_confirmation')
+        <span class="error-message-register">{{ $message }}</span>
+    @enderror
+
+
+    <div class="btn-box">
+        <button type="submit" class="button">Register</button>
+    </div>
+
+    <div class="switch-button">
+        <p>Already have an account?</p>
+        <a href="{{ route('login') }}" id="showLoginForm">Login</a>
+    </div>
+</form>
+<script>
+const toggleRegisterPassword = document.getElementById('toggleRegisterPassword');
+const registerPasswordField = document.getElementById('registerPassword');
+const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+const confirmPasswordField = document.getElementById('confirmPassword');
+
+toggleRegisterPassword.addEventListener('click', function () {
+    const type = registerPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
+    registerPasswordField.setAttribute('type', type);
+    this.setAttribute('name', type === 'password' ? 'lock-closed' : 'lock-open');
+});
+
+toggleConfirmPassword.addEventListener('click', function () {
+    const type = confirmPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
+    confirmPasswordField.setAttribute('type', type);
+    this.setAttribute('name', type === 'password' ? 'lock-closed' : 'lock-open');
+});
+
+</script>
 @endsection

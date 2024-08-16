@@ -48,7 +48,7 @@
                     <div class="col-lg-2">
                         <div class="logo">
                             <a href="{{ route('client.home') }}">
-                                <img src="{{ asset('assets/client/assets/img/logo/logo.png') }}" alt="Brand Logo">
+                                <img src="{{ asset('assets/client/assets/img/logo/umishop.png') }}" alt="Brand Logo">
                             </a>
                         </div>
                     </div>
@@ -100,12 +100,12 @@
                                                 </li>
                                                 <li class="megamenu-banners d-none d-lg-block">
                                                     <a href="#">
-                                                        <img src="assets/img/banner/img1-static-menu.jpg" alt="">
+                                                        <img src="assets/img/banner/banner-thoi-trang-nam-dep.jpg" alt="">
                                                     </a>
                                                 </li>
                                                 <li class="megamenu-banners d-none d-lg-block">
                                                     <a href="#">
-                                                        <img src="assets/img/banner/img2-static-menu.jpg" alt="">
+                                                        <img src="assets/img/banner/banner-thoi-trang-nam-dep.jpg" alt="">
                                                     </a>
                                                 </li>
                                             </ul>
@@ -179,7 +179,12 @@
                                         <ul class="dropdown-list">
                                             <li><a href="{{ route('login') }}">login</a></li>
                                             <li><a href="{{ route('register') }}">register</a></li>
-                                            <li><a href="{{ route('logout') }}">logout</a></li>
+                                            <li>
+                                                <a href="#" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">Logout</a>
+                                                <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            </li>
                                             {{-- <li><a href="#">my account</a></li> --}}
                                             <li><a href="{{ route('donhangs.index') }}">My Order</a></li>
                                         </ul>
@@ -220,12 +225,12 @@
                     <div class="mobile-main-header">
                         <div class="mobile-logo">
                             <a href="index.html">
-                                <img src="assets/img/logo/logo.png" alt="Brand Logo">
+                                <img src="{{ asset('assets/client/assets/img/logo/umishop.png') }}" alt="Brand Logo">
                             </a>
                         </div>
                         <div class="mobile-menu-toggler">
                             <div class="mini-cart-wrap">
-                                <a href="cart.html">
+                                <a href="#">
                                     <i class="pe-7s-shopbag"></i>
                                     <div class="notification">0</div>
                                 </a>
@@ -386,8 +391,8 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="myaccount">
                                     <a class="dropdown-item" href="#">my account</a>
-                                    <a class="dropdown-item" href="login-register.html"> login</a>
-                                    <a class="dropdown-item" href="login-register.html">register</a>
+                                    <li><a href="{{ route('login') }}">login</a></li>
+                                    <li><a href="{{ route('register') }}">register</a></li>
                                 </div>
                             </div>
                         </li>
