@@ -176,7 +176,7 @@
                                         <a href="#">
                                             <i class="pe-7s-user"></i>
                                         </a>
-                                        <ul class="dropdown-list">
+                                        {{-- <ul class="dropdown-list">
                                             <li><a href="{{ route('login') }}">login</a></li>
                                             <li><a href="{{ route('register') }}">register</a></li>
                                             <li>
@@ -185,9 +185,28 @@
                                                     @csrf
                                                 </form>
                                             </li>
-                                            {{-- <li><a href="#">my account</a></li> --}}
+                                            <li><a href="#">my account</a></li>
                                             <li><a href="{{ route('donhangs.index') }}">My Order</a></li>
+                                        </ul> --}}
+                                        <ul class="dropdown-list">
+                                            @guest
+                                                <li><a href="{{ route('login') }}">Login</a></li>
+                                                <li><a href="{{ route('register') }}">Register</a></li>
+                                            @else
+                                                <li>
+                                                    <a href="#" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">Logout</a>
+                                                    <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                    </form>
+                                                </li>
+                                                <li><a href="{{ route('donhangs.index') }}">My Order</a></li>
+
+                                                @if(auth()->user()->role === \App\Models\User::ROLE_ADMIN)
+                                                    <li><a href="{{ route('admins.dashboard') }}">Admin Dashboard</a></li>
+                                                @endif
+                                            @endguest
                                         </ul>
+
                                     </li>
                                     <li>
                                         <a href="#">

@@ -1,12 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\AuthAdminController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\DonHangController;
 use App\Http\Controllers\Admin\SanPhamController;
@@ -52,13 +52,22 @@ Route::middleware('auth')->prefix('donhangs')
     });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+
 // Route Admin
 Route::middleware(['auth', 'auth.admin'])->prefix('admins')
     ->as('admins.')
     ->group(function () {
+
+        // trang dashboard
         Route::get('/dashboard', function () {
             return view('admins.dashboard');
         })->name('dashboard');
+
+        // Route tài khoản
+        Route::get('/list-tai-khoan', [AuthAdminController::class, 'index'])->name('users.index');
+        Route::patch('/admins/users/{id}/update-role', [AuthAdminController::class, 'updateRole'])->name('users.updateRole');
+        Route::delete('/admins/users/{id}', [AuthAdminController::class, 'destroy'])->name('users.destroy');
 
         // route danh mục
         Route::prefix('danhmucs')
@@ -85,8 +94,8 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::put('{id}/update',       [SanPhamController::class, 'update'])->name('update');
                 Route::delete('{id}/destroy',   [SanPhamController::class, 'destroy'])->name('destroy');
             });
-            // Route đơn hàng
-            Route::prefix('donhangs')
+        // Route đơn hàng
+        Route::prefix('donhangs')
             ->as('donhangs.')
             ->group(function () {
                 Route::get('/',                 [DonHangController::class, 'index'])->name('index');

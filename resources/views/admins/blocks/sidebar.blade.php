@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class='tp-link' href='calendar.html'>
+                    <a class='tp-link' href='{{ route('admins.users.index') }}'>
                         <i data-feather="users"></i>
                         <span> quản lý tài khoản </span>
                     </a>
@@ -40,7 +40,7 @@
             <ul id="side-menu">
                 <li class="menu-title">kinh doanh </li>
                 <li>
-                    <a class='tp-link' href='{{ route('admins.danhmucs.index') }}'>
+                    <a class='tp-link' href='{{ route('admins.users.index') }}'>
                         <i data-feather="align-center"></i>
                         <span> Danh mục sản phẩm </span>
                     </a>
