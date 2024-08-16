@@ -1,0 +1,53 @@
+[33mcommit cd296987ec4300029763a45cba918866e7f6dc38[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/sinh[m[33m, [m[1;31morigin/main[m[33m, [m[1;32msinh[m[33m)[m
+Author: sinhduong <sinhduong1508@gmail.com>
+Date:   Fri Aug 16 17:09:11 2024 +0700
+
+    đổi dao diện login & register & reset pass
+
+[33mcommit 916d3fb957103fc31f5d370b9842fe64ec142a32[m
+Author: sinhduong <sinhduong1508@gmail.com>
+Date:   Sat Aug 10 16:12:08 2024 +0700
+
+    api
+
+[33mcommit 6fca41b5a897257e5628c80a0f2ea6d47424917f[m
+Author: sinhduong <sinhduong1508@gmail.com>
+Date:   Fri Aug 9 21:54:38 2024 +0700
+
+    update
+
+[33mcommit a23351055b87b086e818eb7df1a4357d4bff7b0e[m
+Author: sinhduong <sinhduong1508@gmail.com>
+Date:   Mon Aug 5 16:22:35 2024 +0700
+
+    Đổ dao diện, đơn hàng , thanh toán, ra đơn, quản lý đơn hàng
+
+[33mcommit 87818c16936c5f78faa6db5392c2cab90a0d7210[m
+Author: sinhduong <sinhduong1508@gmail.com>
+Date:   Thu Aug 1 21:53:57 2024 +0700
+
+    thêm sản phẩm vào giỏ hàng bằng session
+
+[33mcommit 7e51b44e32b4655901e97fd908fc6c1c8471593d[m
+Author: sinhduong <sinhduong1508@gmail.com>
+Date:   Tue Jul 30 13:23:15 2024 +0700
+
+    chi tiết sản phẩm
+
+[33mcommit 5d2c7387cb4033d9517ee4aed748c4e9f3ba4b20[m
+Author: sinhduong <sinhduong1508@gmail.com>
+Date:   Tue Jul 30 00:35:14 2024 +0700
+
+    crud sản phẩm
+
+[33mcommit 919023be774ca1c9f5cffde1de376055eabdfba0[m
+Author: sinhduong <sinhduong1508@gmail.com>
+Date:   Sat Jul 27 02:15:20 2024 +0700
+
+    hiển thị & thêm sản phẩm
+
+[33mcommit 4c04fbacfe46e862b5c4266fe897d9257ae6c52b[m[33m ([m[1;32mmaster[m[33m)[m
+Author: sinhduong <sinhduong1508@gmail.com>
+Date:   Fri Jul 26 14:20:31 2024 +0700
+
+    danh mục sản phẩm
